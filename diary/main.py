@@ -10,9 +10,9 @@ def save_text_to_file(text: str, file_number: int) -> None:
 def main() -> None:
     load_dotenv(verbose=True)
     file_number = 1
-    for page_number in range(3):
+    for page_number in range(3, 10):
         response = requests.get(os.environ.get("DIARY_URL").format(page_number=page_number))
-        text = response.content.decode('shift_jis')
+        text = response.content.decode('shift_jis', errors='replace')
 
         save_text_to_file(text, file_number)
 
